@@ -1,14 +1,10 @@
 class Portfolio {
-
-    constructor(data){
-
-        this.id=data.id;
-        this.title=data.title;
-        this.description=data.description;
-        this.image=data.image;
-
+    constructor(id, title, description, image) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.image = image;
     }
-
 }
 
-module.exports=Portfolio;
+module.exports = Portfolio;

@@ -5,23 +5,18 @@ const createBooking = (req, res) => {
 
     const {
         user_id,
-        service_title,
-        project_description,
-        booking_date
+        service_type,
+        project_description
     } = req.body;
 
     db.query(
-        "INSERT INTO bookings(user_id, service_title, project_description, booking_date) VALUES(?,?,?,?)",
-        [
-            user_id,
-            service_title,
-            project_description,
-            booking_date
-        ],
+        "INSERT INTO bookings(user_id, service_type, project_description) VALUES(?,?,?)",
+        [user_id, service_type, project_description],
         (err, result) => {
 
-            if (err)
+            if (err) {
                 return res.status(500).json(err);
+            }
 
             res.status(201).json({
                 success: true,
@@ -31,24 +26,23 @@ const createBooking = (req, res) => {
 
         }
     );
-
 };
 
 // Get all bookings
 const getBookings = (req, res) => {
 
     db.query(
-        "SELECT * FROM bookings ORDER BY created_at DESC",
+        "SELECT * FROM bookings",
         (err, result) => {
 
-            if (err)
+            if (err) {
                 return res.status(500).json(err);
+            }
 
             res.json(result);
 
         }
     );
-
 };
 
 // Get one booking
@@ -59,59 +53,46 @@ const getBookingById = (req, res) => {
         [req.params.id],
         (err, result) => {
 
-            if (err)
+            if (err) {
                 return res.status(500).json(err);
-
-            if (result.length === 0) {
-                return res.status(404).json({
-                    message: "Booking not found"
-                });
             }
 
-            res.json(result[0]);
+            res.json(result);
 
         }
     );
-
 };
 
 // Update booking
 const updateBooking = (req, res) => {
 
     const {
-        service_title,
+        service_type,
         project_description,
-        booking_date,
         status
     } = req.body;
 
     db.query(
-        `UPDATE bookings
-         SET service_title=?,
-             project_description=?,
-             booking_date=?,
-             status=?
-         WHERE id=?`,
+        "UPDATE bookings SET service_type=?, project_description=?, status=? WHERE id=?",
         [
-            service_title,
+            service_type,
             project_description,
-            booking_date,
             status,
             req.params.id
         ],
         (err) => {
 
-            if (err)
+            if (err) {
                 return res.status(500).json(err);
+            }
 
             res.json({
                 success: true,
-                message: "Booking updated successfully."
+                message: "Booking updated."
             });
 
         }
     );
-
 };
 
 // Delete booking
@@ -122,17 +103,17 @@ const deleteBooking = (req, res) => {
         [req.params.id],
         (err) => {
 
-            if (err)
+            if (err) {
                 return res.status(500).json(err);
+            }
 
             res.json({
                 success: true,
-                message: "Booking deleted successfully."
+                message: "Booking deleted."
             });
 
         }
     );
-
 };
 
 module.exports = {

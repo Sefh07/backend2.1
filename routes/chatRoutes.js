@@ -8,5 +8,6 @@ const {
 
 router.post("/", sendMessage);
 router.get("/:userId", getMessages);
+router.delete("/:id", getMessages);
 
 module.exports = router;

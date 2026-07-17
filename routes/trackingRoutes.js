@@ -7,6 +7,9 @@ const {
 } = require("../controllers/trackingController");
 
 router.get("/", getTracking);
+router.get("/:id", getTracking);
+router.post("/", getTracking);
+router.delete("/:id", getTracking);
 router.put("/:id", updateTracking);
 
 module.exports = router;

@@ -9,6 +9,7 @@ const {
 } = require("../controllers/portfolioController");
 
 router.get("/", getPortfolio);
+router.get("/:id", getPortfolio);
 router.post("/", addPortfolio);
 router.put("/:id", updatePortfolio);
 router.delete("/:id", deletePortfolio);

@@ -10,6 +10,7 @@ const {
 
 router.post("/", scheduleVisit);
 router.get("/", getSchedules);
+router.get("/:id", getSchedules);
 router.put("/:id", updateSchedule);
 router.delete("/:id", deleteSchedule);
 

@@ -9,6 +9,7 @@ const {
 } = require("../controllers/paymentController");
 
 router.post("/", createPayment);
+router.get("/:id", getPayments);
 router.get("/", getPayments);
 router.put("/:id/verify", verifyPayment);
 router.delete("/:id", deletePayment);
